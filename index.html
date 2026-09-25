@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NEXO | Inteligência que conecta pessoas e empresas.</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <section class="card">
+
+      <div class="brand">
+        <h1>NEXO</h1>
+
+        <p>
+          Inteligência que conecta pessoas e empresas.
+        </p>
+      </div>
+
+      <h2>Bem-vindo ao NEXO</h2>
+
+      <div class="subtitle">
+        Estamos preparando seu ambiente de acesso.
+      </div>
+
+      <div id="message" class="message info">
+        Verificando seu acesso...
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="assets/js/supabase.js"></script>
+
+  <script>
+
+    async function iniciarNexo() {
+
+      const message = document.getElementById("message");
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.auth.getSession();
+
+        if (error) {
+          throw error;
+        }
+
+        const session = data.session;
+
+        if (!session) {
+
+          message.textContent =
+            "Acesso confirmado. Faça login para continuar.";
+
+          message.className =
+            "message success";
+
+          setTimeout(() => {
+
+            window.location.href =
+              "auth/login.html";
+
+          }, 1200);
+
+          return;
+        }
+
+        const user = session.user;
+
+        const { data: perfil, error: perfilError } =
+          await supabaseClient
+            .from("usuarios")
+            .select("tipo, ativo")
+            .eq("id", user.id)
+            .maybeSingle();
+
+        if (perfilError) {
+          throw perfilError;
+        }
+
+        if (!perfil) {
+
+          message.textContent =
+            "Seu acesso foi confirmado. Vamos concluir seu cadastro.";
+
+          message.className =
+            "message success";
+
+          setTimeout(() => {
+
+            window.location.href =
+              "auth/login.html";
+
+          }, 1500);
+
+          return;
+        }
+
+        if (perfil.tipo === "empresa") {
+
+          window.location.href =
+            "empresa/dashboard.html";
+
+        } else {
+
+          window.location.href =
+            "candidato/perfil.html";
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+          "Não foi possível concluir o acesso. Faça login novamente.";
+
+        message.className =
+          "message error";
+
+        setTimeout(() => {
+
+          window.location.href =
+            "auth/login.html";
+
+        }, 1800);
+
+      }
+
+    }
+
+    iniciarNexo();
+
+  </script>
+
+</body>
+</html>
