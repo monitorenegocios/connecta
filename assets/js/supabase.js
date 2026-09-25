@@ -6,7 +6,7 @@
 const SUPABASE_URL = "https://gfuhkfgcmgumsqwcqtuh.supabase.co";
 
 // Cole aqui a ANON/PUBLISHABLE KEY do projeto Supabase.
-const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_KEY";
+const SUPABASE_ANON_KEY = "sb_publishable_CjnYwfuAzbxaOof-vMtPDQ_Urv2OQCU";
 
 if (!window.supabase) {
   throw new Error("Biblioteca Supabase não carregada.");
