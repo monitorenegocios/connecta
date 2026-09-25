@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXO | Cadastro</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="brand">
+        <h1>NEXO</h1>
+        <p>Inteligência que conecta pessoas e empresas.</p>
+      </div>
+
+      <h2>Criar acesso</h2>
+      <div class="subtitle">
+        Comece seu cadastro. O tipo de acesso define o ambiente inicial.
+      </div>
+
+      <form id="formCadastro">
+        <label for="nome">Nome / Razão social</label>
+        <input id="nome" type="text" autocomplete="name" required>
+
+        <label>Quero me cadastrar como</label>
+        <div class="tipo-grid">
+          <label>
+            <input type="radio" name="tipo" value="candidato" checked>
+            <span class="tipo">Candidato</span>
+          </label>
+          <label>
+            <input type="radio" name="tipo" value="empresa">
+            <span class="tipo">Empresa</span>
+          </label>
+        </div>
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="email" required>
+
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" minlength="8" autocomplete="new-password" required>
+
+        <label for="confirmar">Confirmar senha</label>
+        <input id="confirmar" type="password" minlength="8" autocomplete="new-password" required>
+
+        <button type="submit">CRIAR ACESSO</button>
+      </form>
+
+      <div id="message" class="message"></div>
+
+      <div class="small">
+        Ao prosseguir, o usuário deverá receber e aceitar os termos de uso
+        e a política de privacidade do NEXO antes das etapas de tratamento
+        e compartilhamento de dados pessoais.
+      </div>
+
+      <div class="footer-link">
+        Já possui acesso?
+        <a href="login.html">Entrar</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/supabase.js"></script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
