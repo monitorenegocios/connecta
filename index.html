@@ -2,147 +2,43 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>NEXO | Inteligência que conecta pessoas e empresas.</title>
-
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CONNECTA | Monitore</title>
   <link rel="stylesheet" href="assets/css/style.css">
-
+  <style>
+    .connecta-loading{width:min(92%,520px);text-align:center;padding:36px 24px;margin:auto}
+    .connecta-loading img{display:block;width:min(100%,430px);height:auto;margin:0 auto 18px}
+    .connecta-loading p{margin:0;color:#52627a;font-size:14px}
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
-
-  <main class="page">
-
-    <section class="card">
-
-      <div class="brand">
-        <h1>NEXO</h1>
-
-        <p>
-          Inteligência que conecta pessoas e empresas.
-        </p>
-      </div>
-
-      <h2>Bem-vindo ao NEXO</h2>
-
-      <div class="subtitle">
-        Estamos preparando seu ambiente de acesso.
-      </div>
-
-      <div id="message" class="message info">
-        Verificando seu acesso...
-      </div>
-
-    </section>
-
+  <main class="connecta-loading">
+    <img src="assets/img/connecta-logo.png" alt="CONNECTA by MONITORE">
+    <p>Inteligência que conecta talentos e oportunidades.</p>
   </main>
-
   <script src="assets/js/supabase.js"></script>
-
   <script>
+    (async function(){
+      try{
+        const {data:{session}} = await supabaseClient.auth.getSession();
+        if(!session){ window.location.href="auth/login.html"; return; }
 
-    async function iniciarNexo() {
+        const {data:usuario,error} = await supabaseClient
+          .from("usuarios")
+          .select("tipo")
+          .eq("auth_user_id",session.user.id)
+          .single();
 
-      const message = document.getElementById("message");
-
-      try {
-
-        const { data, error } =
-          await supabaseClient.auth.getSession();
-
-        if (error) {
-          throw error;
-        }
-
-        const session = data.session;
-
-        if (!session) {
-
-          message.textContent =
-            "Acesso confirmado. Faça login para continuar.";
-
-          message.className =
-            "message success";
-
-          setTimeout(() => {
-
-            window.location.href =
-              "auth/login.html";
-
-          }, 1200);
-
-          return;
-        }
-
-        const user = session.user;
-
-        const { data: perfil, error: perfilError } =
-          await supabaseClient
-            .from("usuarios")
-            .select("tipo, ativo")
-            .eq("id", user.id)
-            .maybeSingle();
-
-        if (perfilError) {
-          throw perfilError;
-        }
-
-        if (!perfil) {
-
-          message.textContent =
-            "Seu acesso foi confirmado. Vamos concluir seu cadastro.";
-
-          message.className =
-            "message success";
-
-          setTimeout(() => {
-
-            window.location.href =
-              "auth/login.html";
-
-          }, 1500);
-
-          return;
-        }
-
-        if (perfil.tipo === "empresa") {
-
-          window.location.href =
-            "empresa/dashboard.html";
-
-        } else {
-
-          window.location.href =
-            "candidato/perfil.html";
-
-        }
-
-      } catch (error) {
-
-        console.error(error);
-
-        message.textContent =
-          "Não foi possível concluir o acesso. Faça login novamente.";
-
-        message.className =
-          "message error";
-
-        setTimeout(() => {
-
-          window.location.href =
-            "auth/login.html";
-
-        }, 1800);
-
+        if(error || !usuario){ window.location.href="auth/login.html"; return; }
+        if(usuario.tipo==="candidato"){ window.location.href="candidato/perfil.html"; return; }
+        if(usuario.tipo==="empresa"){ window.location.href="empresa/dashboard.html"; return; }
+        window.location.href="auth/login.html";
+      }catch(e){
+        console.error("Erro ao iniciar o CONNECTA:",e);
+        window.location.href="auth/login.html";
       }
-
-    }
-
-    iniciarNexo();
-
+    })();
   </script>
-
 </body>
 </html>
