@@ -5,40 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CONNECTA | Entrar</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .connecta-logo{display:block;width:min(100%,430px);height:auto;margin:0 auto 14px}
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <main class="page">
     <section class="card">
       <div class="brand">
-        <img src="../assets/img/connecta-logo.svg"
-             alt="CONNECTA by Monitore"
-             class="connecta-logo">
+        <img src="../assets/img/connecta-logo.png" alt="CONNECTA by MONITORE" class="connecta-logo">
         <p>Inteligência que conecta talentos e oportunidades.</p>
       </div>
-
       <h2>Entrar</h2>
       <div class="subtitle">Acesse seu ambiente CONNECTA.</div>
-
       <form id="formLogin">
         <label for="email">E-mail</label>
         <input id="email" type="email" autocomplete="email" required>
-
         <label for="senha">Senha</label>
         <input id="senha" type="password" autocomplete="current-password" required>
-
         <button type="submit">ENTRAR</button>
       </form>
-
       <div id="message" class="message"></div>
-
       <div class="footer-link">
         Ainda não possui acesso?
         <a href="cadastro.html">Criar cadastro</a>
       </div>
     </section>
   </main>
-
   <script src="../assets/js/supabase.js"></script>
   <script src="../assets/js/auth.js"></script>
 </body>
