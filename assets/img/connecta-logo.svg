@@ -1,1 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" role="img">
+<title>CONNECTA by MONITORE</title>
+<rect width="1000" height="240" fill="none"/>
+<text x="20" y="125" font-family="Montserrat,Arial,sans-serif" font-size="104" font-weight="800" letter-spacing="-5" fill="#0B1F41">CONN</text>
+<path d="M348 40 L390 40 L350 88 L350 125 L320 125 L320 78 Z" fill="#0B8CFF"/>
+<text x="404" y="125" font-family="Montserrat,Arial,sans-serif" font-size="104" font-weight="800" letter-spacing="-5" fill="#0B1F41">CTA</text>
+<rect x="492" y="57" width="44" height="12" rx="6" fill="#0B8CFF"/>
+<rect x="492" y="80" width="44" height="12" rx="6" fill="#0B8CFF"/>
+<rect x="492" y="103" width="44" height="12" rx="6" fill="#0B8CFF"/>
+<text x="590" y="178" font-family="Montserrat,Arial,sans-serif" font-size="32" font-weight="400" letter-spacing="7" fill="#0B1F41">by MONITORE</text>
+</svg>
 
